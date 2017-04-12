@@ -1,4 +1,6 @@
 #include <iostream>
+#include <typeinfo>
+
 int main() {
 	const int i = 42;
 
@@ -16,13 +18,14 @@ int main() {
 	//p is a pointer to a const int 
 	//const int * p
 	auto *p = &i;
-	std::cout << &i << p << std::endl;
+	std::cout << typeid(p).name() << std::endl;
 	// Changing i will not work: *p = 0 ;
 
 	//auto will be int
 	//j2 is of type const int
 	//k2 is of type const int & (auto means int)
 	const auto j2 = i, &k2 = i;
+	std::cout << typeid(i).name() << std::endl;
 	//Assigning k2 will not work k2 = 0 ; 
 	//Assigning j2 will also not work j2 = 0;
 
