@@ -1,11 +1,5 @@
 #include <iostream>
-
-struct Sales_data
-{
-	std::string isbn ;
-	unsigned nr_units = 0 ;
-	double revenue = 0.0 ;
-};
+#include "Sales_data.h"
 
 int main() {
 	Sales_data itemStart, item;
