@@ -4,12 +4,11 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void swap2ints(int *i1, int *i2) {
+void swap2ints(int &i1, int &i2) {
   // save the value of i1 in a copy
-  const auto aux = *i1;
-  *i1 = *i2;
-  *i2 = aux;
-  i1 = i2 = 0;
+  const auto aux = i1;
+  i1 = i2;
+  i2 = aux;
 }
 
 int main() {
@@ -19,7 +18,7 @@ int main() {
 
   cin >> integer1 >> integer2;
 
-  swap2ints(&integer1, &integer2);
+  swap2ints(integer1, integer2);
 
   cout << "The value of the first int is now: " << integer1 << endl;
   cout << "The value of the second int is now: " << integer2 << endl;
