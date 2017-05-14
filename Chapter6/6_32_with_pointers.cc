@@ -5,7 +5,7 @@ using std::cout;
 
 //returns a reference to an int 
 //array must exist after the function terminates therefore it was changed to &
-int & get(int * & array, int index) {
+inline int & get(int * & array, int index) {
 	return array[index];
 }
 
