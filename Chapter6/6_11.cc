@@ -3,7 +3,7 @@
 using std::cout;
 using std::endl;
 
-void reset(int &c) {
+inline void reset(int &c) {
 	c = 0;
 }
 

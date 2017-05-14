@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 
 
-double absolute(double val) {
+inline double absolute(double val) {
 
 	double absoluteVal;
 

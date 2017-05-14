@@ -4,7 +4,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-void swap2ints(int &i1, int &i2) {
+inline void swap2ints(int &i1, int &i2) {
   // save the value of i1 in a copy
   const auto aux = i1;
   i1 = i2;

@@ -6,7 +6,7 @@ using std::endl;
 using std::begin;
 using std::end;
 
-void print (const int *p) {
+inline void print (const int *p) {
 	if(p)
 		cout << *p << endl;
 }

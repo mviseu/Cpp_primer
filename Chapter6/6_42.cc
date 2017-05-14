@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-string makePlural(size_t ctr, const string &word, const string &ending = "s") {
+inline string makePlural(size_t ctr, const string &word, const string &ending = "s") {
   return ctr > 1 ? word + ending : word;
 }
 

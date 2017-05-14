@@ -3,7 +3,7 @@
 using std::cout;
 using std::endl;
 
-void swapPointers(const int * &rp1, const int * &rp2) {
+inline void swapPointers(const int * &rp1, const int * &rp2) {
   const int *aux = rp1;
   rp1 = rp2;
   rp2 = aux;

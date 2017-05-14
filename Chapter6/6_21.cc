@@ -5,7 +5,7 @@ using std::cout;
 using std::endl;
 using std::begin;
 
-int largerValue(const int i, const int *p) {
+inline int largerValue(const int i, const int *p) {
     if (i > *p) {
       return i;
     } else {
