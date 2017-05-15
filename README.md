@@ -10,9 +10,9 @@ Exercises
 void manip(int, int);
 double dobj;
 
-//conversion from char to int is integral promotion rank 3
+//conversion from char to int is match through integral promotion
 manip('a', 'z');
-//conversion from doubles to int of rank 4 
+//conversion from doubles to int is match through arithmetic conversion 
 manip(55.4, dobj);
 
 //the first function has matching precedence.
