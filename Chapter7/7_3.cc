@@ -40,10 +40,9 @@ int main() {
         total = trans;
       }
     }
-
+    print(cout, total);
   } else {
     cerr << "No data?" << endl;
   }
-  print(cout, total);
   return 0;
 }

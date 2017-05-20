@@ -1,3 +1,5 @@
+infile
+outfile
 *.out
 *.out.stackdump
 *.o
