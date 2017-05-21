@@ -19,3 +19,7 @@ The code is equivalent to:
 if(cin >> data1 >> data2)
 ```
 if(true) is met only if cin sucessfully reads into data1 and data2.
+
+
+## Exercise 7.25
+The Screen class can safely rely on the default versions of copy assignment, where copying/assigning the class object copies/assigns each one of its data members. Classes that need dynamic memory generally cannot rely on the default versions of copy/assign. However, the default version of copy/assign works correctly for vector and string members such as the *contents* member of class screen.
