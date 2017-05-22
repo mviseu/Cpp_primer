@@ -2,12 +2,16 @@
 
 #include <iostream>
 #include <string>
-
+#include "7_32_Window_mgr.h"
 using std::string;
 using std::cout;
 using std::ostream;
 
+
 class Screen {
+
+friend void Window_mgr::clear(ScreenIndex);
+
 public:
   using pos = string::size_type;
   // constructors
@@ -33,6 +37,7 @@ public:
     displayAux(os);
     return *this;
   }
+  pos size() const;
 
 private:
   pos height = 0;
@@ -63,3 +68,7 @@ inline Screen &Screen::set(pos r, pos col, char ch) {
   contents[r * width + col] = ch;
   return *this;
 }
+
+inline Screen::pos Screen::size() const {
+  return height * width;
+} 
