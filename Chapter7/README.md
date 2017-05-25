@@ -23,3 +23,14 @@ if(true) is met only if cin sucessfully reads into data1 and data2.
 
 ## Exercise 7.25
 The Screen class can safely rely on the default versions of copy assignment, where copying/assigning the class object copies/assigns each one of its data members. Classes that need dynamic memory generally cannot rely on the default versions of copy/assign. However, the default version of copy/assign works correctly for vector and string members such as the *contents* member of class screen.
+
+## Exercise 7.47
+
+Explicit Sales_data constructor that takes string argument
+
+Drawbacks
+1. Cannot be implicitly converted, i.e., a string cannot be used where a Sales_data object is expected (less flexible)
+2. A string cannot be copied and assigned to create a Sales_data object
+
+Benefits
+1. Avoids creation of a temp Sales_data object that is destroyed after its use
