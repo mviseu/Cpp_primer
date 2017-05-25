@@ -34,3 +34,8 @@ Drawbacks
 
 Benefits
 1. Avoids creation of a temp Sales_data object that is destroyed after its use
+
+## Exercise 7.51
+*Vector* defines its single argument constructor as explicit because we do not want implicit conversions that create a temporary value-initialized vector exclusively based on its size information. On the other hand, a user will probably want to use a const char * and string interchangeably and therefore this constructor cannot be explicit.
+
+
