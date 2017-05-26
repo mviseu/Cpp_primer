@@ -38,4 +38,14 @@ Benefits
 ## Exercise 7.51
 *Vector* defines its single argument constructor as explicit because we do not want implicit conversions that create a temporary value-initialized vector exclusively based on its size information. On the other hand, a user will probably want to use a const char * and string interchangeably and therefore this constructor cannot be explicit.
 
+## Exercise 7.56
+A *static* class member is common to all objects of that class type, rather than being associated with the individual objects. For example, we may want to define a common interest rate in an Account class, which is common to all objects of type Account. 
+
+Advantages
+1. If there is a change in the value of a static member, all the objects of that class type will use this new value.
+2. From an efficiency standpoint it is better to use a static member than have each object store the member (less important though than 1.).
+
+Ways in which static class members differ from ordinary members
+* A static data member can be of incomplete type;
+* A static data member can be used as a default argument
 
