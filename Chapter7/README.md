@@ -43,7 +43,7 @@ A *static* class member is common to all objects of that class type, rather than
 
 Advantages
 1. If there is a change in the value of a static member, all the objects of that class type will use this new value.
-2. From an efficiency standpoint it is better to use a static member than have each object store the member (less important though than 1.).
+2. From an efficiency standpoint it is better to use a static member than have each object store the member (less important though than 1).
 
 Ways in which static class members differ from ordinary members
 * A static data member can be of incomplete type;
