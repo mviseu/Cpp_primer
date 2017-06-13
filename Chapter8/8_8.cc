@@ -6,6 +6,7 @@ using std::cin;
 using std::cout;
 using std::istream;
 using std::ifstream;
+using std::ofstream;
 using std::ostream;
 using std::cerr;
 using std::endl;
@@ -39,28 +40,32 @@ Sales_data &combine(Sales_data &lhs, const Sales_data &rhs) {
 
 int main(int argc, char ** argv) {
   Sales_data total;
-  string ifname;
-  if(argc > 1) {
+  string ifname, ofname;
+  
+  if(argc > 2) {
     ifname = argv[1];
+    ofname = argv[2];
   } else {
-    cout << "More arguments required" << endl;
+    cout << "More main arguments required" << endl;
+    return -1;
   }
   ifstream input(ifname);
+  ofstream output(ofname, ofstream::app);
   if (read(input, total)) {
     Sales_data trans;
     while (read(input, trans)) {
       if (compareIsbn(total, trans)) {
         combine(total, trans);
       } else {
-        print(cout, total);
+        print(output, total);
         total = trans;
       }
     }
 
   } else {
     cerr << "No data?" << endl;
-    return 0;
+    return -1;
   }
-  print(cout, total);
+  print(output, total);
   return 0;
 }
