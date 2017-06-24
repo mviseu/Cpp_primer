@@ -29,7 +29,7 @@ ostream &print(vector<string> vec, ostream &os) {
  	auto beg = vec.begin();
  	auto end = vec.end();
  	sort(beg, end);
- 	auto after_unique = unique(beg, end);
+ 	auto after_unique = unique(beg, end)git s;
  	end = vec.erase(after_unique, vec.end());
  	stable_sort(beg, end, pred);
  }
