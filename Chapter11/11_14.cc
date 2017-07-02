@@ -1,11 +1,11 @@
-#include <map>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 #include <iterator>
+#include <map>
+#include <string>
 #include <utility>
+#include <vector>
 
 using std::map;
 using std::string;
@@ -15,48 +15,51 @@ using std::back_inserter;
 using std::cout;
 using std::endl;
 
+class Families {
+public:
+  using child = pair<string, string>;
+  using children = vector<child>;
+  using family = pair<string, children>;
 
-map<string, vector<pair<string, string>>> &addFamily(map<string, vector<pair<string, string>>> &families, 
-														   const pair<string, vector<pair<string, string>>> &family) {
-	families[family.first] = family.second; 
-	return families;
-}
+  Families &addFamily(const family &fam) {
+    families[fam.first] = fam.second;
+    return *this;
+  }
 
-map<string, vector<pair<string, string>>> &addChildren(map<string, vector<pair<string, string>>> &families, 
-														    const string &surname, const vector<pair<string, string>> &children) {
-	std::copy(children.cbegin(), children.cend(), std::back_inserter(families[surname])); 
-	return families;
-}
+  Families &addChildren(const string &surname, const children &childr) {
+    std::copy(childr.cbegin(), childr.cend(),
+              std::back_inserter(families[surname]));
+    return *this;
+  }
 
-void print(const pair<string, string> & p) {
-	cout << p.first << " " << p.second << " ";
-}
+  void print() const {
+    for (const auto &fam : families) {
+      cout << fam.first << " ";
+      for (const auto &child : fam.second) {
+        cout << child.first << " " << child.second << " ";
+      }
+      cout << endl;
+    }
+  }
 
-
-void printFamilies(const map<string, vector<pair<string, string>>>&families) {
-	for(const auto &family : families) {
-		cout << family.first << " ";
-		for(const auto &child : family.second) {
-			print(child);
-		}
-		cout << endl;
-	}
-
-}
+private:
+  map<string, children> families;
+};
 
 int main() {
-	//empty map
-	map<string, vector<pair<string, string>>>families;
-	//add a family
-	const vector<pair<string, string>> children = {{"Ella", "2/10/2000"}, {"Beth", "3/10/1998"}, {"John", "3/10/1998"}};
+  // empty map
+  Families families;
+  // add a family
+  Families::children childr = {
+      {"Ella", "2/10/2000"}, {"Beth", "3/10/1998"}, {"John", "3/10/1998"}};
 
-	addFamily(families, std::make_pair(string("Smith"), children));
+  families.addFamily(std::make_pair(string("Smith"), childr));
 
+  Families::children new_children = {{"Mary", "2/10/1990"},
+                                     {"William", "2/10/1990"}};
 
-	const vector<pair<string, string>> new_children = {{"Mary", "2/10/1990"}, {"william", "2/10/1990"}};
+  families.addChildren(string("Smith"), new_children);
 
-	addChildren(families, string("Smith"), new_children);
-
-	printFamilies(families);
-	return 0;
+  families.print();
+  return 0;
 }
