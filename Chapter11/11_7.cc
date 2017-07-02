@@ -19,7 +19,6 @@ std::map<std::string, std::vector<std::string>> &addChildren(std::map<std::strin
 }
 
 void printFamilies(std::ostream_iterator<std::string> out, const std::map<std::string, std::vector<std::string>>&families) {
-	std::vector<std::string> family;
 	for_each(families.cbegin(), families.cend(), [&](const std::pair<std::string, std::vector<std::string>>&family) {
 		out = family.first;
 		std::copy(family.second.cbegin(), family.second.cend(), out);
