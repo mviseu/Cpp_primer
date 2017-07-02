@@ -22,8 +22,10 @@ int main() {
   copy(vec.cbegin(), vec.cend(), out);
   elimDupl(vec);
   out = "\n";
-  copy(vec.cbegin(), vec.cend(), out);
-
+  copy(vec.cbegin(), vec.cend(), out); 
+  
+ /* std::set<std::string> set(in, eof);
+  std::copy(set.cbegin(), set.cend(), out);*/
 
 
   return 0;
