@@ -10,8 +10,6 @@ using std::set;
 using std::string;
 using std::cout;
 using std::endl;
-using std::cout;
-using std::endl;
 using std::copy;
 using std::for_each;
 using std::pair;
