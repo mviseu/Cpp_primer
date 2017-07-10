@@ -1,5 +1,5 @@
-#include "StrBlob.h"
-#include "StrBlobPtr.h"
+#include "StrBlob_const.h"
+#include "ConstStrBlobPtr.h"
 
 #include <initializer_list>
 #include <memory>
@@ -51,5 +51,5 @@ void StrBlob::check(size_type i, const string &message) const {
   }
 }
 
-StrBlobPtr StrBlob::begin() {return StrBlobPtr(*this, 0);}
-StrBlobPtr StrBlob::end() {return StrBlobPtr(*this, data -> size());}
+ConstStrBlobPtr StrBlob::begin() const {return ConstStrBlobPtr(*this, 0);}
+ConstStrBlobPtr StrBlob::end() const {return ConstStrBlobPtr(*this, data -> size());}

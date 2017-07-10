@@ -11,11 +11,11 @@ using std::vector;
 using std::initializer_list;
 using std::make_shared;
 
-class StrBlobPtr;
+class ConstStrBlobPtr;
 
 class StrBlob {
-  friend class StrBlobPtr;
-
+  friend class ConstStrBlobPtr;
+  
 public:
   using size_type = vector<string>::size_type;
   
@@ -34,8 +34,8 @@ public:
   void push_back(const string &s);
   void pop_back();
 
-  StrBlobPtr begin();
-  StrBlobPtr end();
+  ConstStrBlobPtr begin() const;
+  ConstStrBlobPtr end() const;
 
 private:
   shared_ptr<vector<string>> data;
