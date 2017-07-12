@@ -3,21 +3,24 @@
 #include <string>
 #include <set>
 #include <map>
+#include <vector>
+#include <iostream>
 
 using std::shared_ptr;
 using std::string;
 using std::set;
 using std::map;
+using std::vector;
+using std::ostream;
 
-class TextQuery;
 
 class QueryResult {
-	QueryResult(shared_ptr<TextQuery> sptr, string wd);
+	friend ostream &print(ostream &os, const QueryResult& qr);
+public:
+	QueryResult(string wd, shared_ptr<vector<string>>p_text, shared_ptr<set<size_t>> ptr_wd_line_nrs);
 
 private:
-	shared_ptr<TextQuery> tq_ptr;
 	string word;
-	int word_count;
-	map<set<int>, string> &line_nr_text;
-
+	shared_ptr<vector<string>> ptr_text;
+	shared_ptr<set<size_t>> ptr_word_line_nrs;
 };

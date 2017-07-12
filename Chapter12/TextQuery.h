@@ -17,14 +17,13 @@ class QueryResult;
 
 class TextQuery
 {
-	friend class QueryResult;
 public:
 	TextQuery(ifstream &input);
+	QueryResult query(const string &word) const;
 
 private:
 	shared_ptr<vector<string>> lines;
-	map<string, shared_ptr<set<int>>> map_word_ptr_line_nr;
-	void buildMap();
+	map<string, shared_ptr<set<size_t>>> map_word_ptr_line_nr;
 	void printMap();
 	
 };

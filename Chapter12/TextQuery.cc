@@ -1,4 +1,5 @@
 #include "TextQuery.h"
+#include "QueryResult.h"
 #include <sstream>
 #include <fstream>
 #include <memory>
@@ -18,21 +19,18 @@ using std::endl;
 using std::make_pair;
 
 TextQuery::TextQuery(ifstream &input) : lines(make_shared<vector<string>>()) {
-	for(string line; getline(input, line); lines -> push_back(line));
-	buildMap();
-	printMap();
-}
 
-void TextQuery::buildMap() {
-	for(size_t i = 0; i != lines -> size(); ++i) {
-		istringstream line((*lines)[i]);
+	for(string line; getline(input, line); ) {
+		lines -> push_back(line);
+		auto i = lines -> size() - 1;
+		istringstream input_line((*lines)[i]);
 		string word;
-		while(line >> word) {
-			map_word_ptr_line_nr.insert(make_pair(word, new set<int>()));
+		while(input_line >> word) {
+			map_word_ptr_line_nr.insert(make_pair(word, new set<size_t>()));
 			map_word_ptr_line_nr[word] -> insert(i);
 		}
-	}
 
+	}
 }
 
 void TextQuery::printMap() {
@@ -43,5 +41,14 @@ void TextQuery::printMap() {
 			cout << i << " ";
 		}
 		cout << endl;
+	}
+}
+
+QueryResult TextQuery::query(const string &word) const {
+	auto ret = map_word_ptr_line_nr.find(word);
+	if(ret == map_word_ptr_line_nr.end()) {
+		return QueryResult(word, lines, make_shared<set<size_t>>());
+	} else {
+		return QueryResult(word, lines, ret -> second);
 	}
 }
