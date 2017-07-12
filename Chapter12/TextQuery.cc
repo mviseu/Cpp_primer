@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <iostream>
+#include <utility>
 
 using std::istringstream;
 using std::ifstream;
@@ -14,10 +15,12 @@ using std::back_inserter;
 using std::istream_iterator;
 using std::cout;
 using std::endl;
+using std::make_pair;
 
 TextQuery::TextQuery(ifstream &input) : lines(make_shared<vector<string>>()) {
 	for(string line; getline(input, line); lines -> push_back(line));
 	buildMap();
+	printMap();
 }
 
 void TextQuery::buildMap() {
@@ -25,16 +28,18 @@ void TextQuery::buildMap() {
 		istringstream line((*lines)[i]);
 		string word;
 		while(line >> word) {
-			map_word_line_nr[word].insert(i);
+			map_word_ptr_line_nr.insert(make_pair(word, new set<int>()));
+			map_word_ptr_line_nr[word] -> insert(i);
 		}
 	}
 
 }
 
 void TextQuery::printMap() {
-	for(const auto &pair : map_word_line_nr) {
+	for(const auto &pair : map_word_ptr_line_nr) {
 		cout << pair.first << " ";
-		for(const auto &i : pair.second) {
+
+		for(const auto &i : *pair.second) {
 			cout << i << " ";
 		}
 		cout << endl;
