@@ -1,5 +1,6 @@
 #include "TextQuery.h"
 #include "QueryResult.h"
+#include "StrBlob.h"
 #include <sstream>
 #include <fstream>
 #include <memory>
@@ -18,12 +19,12 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
-TextQuery::TextQuery(ifstream &input) : lines(make_shared<vector<string>>()) {
+TextQuery::TextQuery(ifstream &input) : lines() {
 
 	for(string line; getline(input, line); ) {
-		lines -> push_back(line);
-		auto i = lines -> size() - 1;
-		istringstream input_line((*lines)[i]);
+		lines.push_back(line);
+		auto i = lines.size() - 1;
+		istringstream input_line((*lines.get())[i]);
 		string word;
 		while(input_line >> word) {
 			map_word_ptr_line_nr.insert(make_pair(word, new set<size_t>()));

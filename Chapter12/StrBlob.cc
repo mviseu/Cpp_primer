@@ -53,3 +53,7 @@ void StrBlob::check(size_type i, const string &message) const {
 
 StrBlobPtr StrBlob::begin() {return StrBlobPtr(*this, 0);}
 StrBlobPtr StrBlob::end() {return StrBlobPtr(*this, data -> size());}
+
+vector<string> *StrBlob::get() const {
+  return data.get();
+}

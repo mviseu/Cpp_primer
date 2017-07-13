@@ -5,6 +5,7 @@
 #include <memory>
 #include <set>
 #include <map>
+#include "StrBlob.h"
 
 using std::ifstream;
 using std::vector;
@@ -22,7 +23,7 @@ public:
 	QueryResult query(const string &word) const;
 
 private:
-	shared_ptr<vector<string>> lines;
+	StrBlob lines;
 	map<string, shared_ptr<set<size_t>>> map_word_ptr_line_nr;
 	void printMap();
 	

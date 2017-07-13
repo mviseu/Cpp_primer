@@ -36,6 +36,8 @@ public:
 
   StrBlobPtr begin();
   StrBlobPtr end();
+  
+  vector<string> *get() const;
 
 private:
   shared_ptr<vector<string>> data;
