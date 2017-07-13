@@ -23,8 +23,8 @@ public:
 	QueryResult query(const string &word) const;
 
 private:
-	StrBlob lines;
-	map<string, shared_ptr<set<size_t>>> map_word_ptr_line_nr;
+	StrBlob file;
+	map<string, shared_ptr<set<size_t>>> wm;
 	void printMap();
 	
 };

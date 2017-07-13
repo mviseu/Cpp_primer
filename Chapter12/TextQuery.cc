@@ -19,23 +19,23 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
-TextQuery::TextQuery(ifstream &input) : lines() {
+TextQuery::TextQuery(ifstream &input) : file() {
 
 	for(string line; getline(input, line); ) {
-		lines.push_back(line);
-		auto i = lines.size() - 1;
-		istringstream input_line((*lines.get())[i]);
+		file.push_back(line);
+		auto i = file.size() - 1;
+		istringstream input_line((*file.get())[i]);
 		string word;
 		while(input_line >> word) {
-			map_word_ptr_line_nr.insert(make_pair(word, new set<size_t>()));
-			map_word_ptr_line_nr[word] -> insert(i);
+			wm.insert(make_pair(word, new set<size_t>()));
+			wm[word] -> insert(i);
 		}
 
 	}
 }
 
 void TextQuery::printMap() {
-	for(const auto &pair : map_word_ptr_line_nr) {
+	for(const auto &pair : wm) {
 		cout << pair.first << " ";
 
 		for(const auto &i : *pair.second) {
@@ -46,10 +46,10 @@ void TextQuery::printMap() {
 }
 
 QueryResult TextQuery::query(const string &word) const {
-	auto ret = map_word_ptr_line_nr.find(word);
-	if(ret == map_word_ptr_line_nr.end()) {
-		return QueryResult(word, lines, make_shared<set<size_t>>());
+	auto ret = wm.find(word);
+	if(ret == wm.end()) {
+		return QueryResult(word, file, make_shared<set<size_t>>());
 	} else {
-		return QueryResult(word, lines, ret -> second);
+		return QueryResult(word, file, ret -> second);
 	}
 }

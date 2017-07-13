@@ -25,7 +25,7 @@ public:
 
 
 private:
-	string word;
-	StrBlob ptr_text;
-	shared_ptr<set<size_t>> ptr_word_line_nrs;
+	string sought;
+	StrBlob file;
+	shared_ptr<set<size_t>> lines;
 };
