@@ -17,6 +17,11 @@ public:
 		i = rhs.i;
 		return *this;
 	}
+	~HasPtr() {
+		if(ps) {
+			delete ps;
+		}
+	}
 private:
 	string *ps;
 	int i;
