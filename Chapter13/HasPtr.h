@@ -9,19 +9,8 @@ public:
 	ps(new string(s)), i(0) {}
 	HasPtr(const HasPtr &hp) :
 	ps(new string(*hp.ps)), i(hp.i) {}
-	HasPtr& operator=(const HasPtr &rhs) {
-		if(ps) {
-			delete ps;
-		}
-		ps = new string(*rhs.ps);
-		i = rhs.i;
-		return *this;
-	}
-	~HasPtr() {
-		if(ps) {
-			delete ps;
-		}
-	}
+	HasPtr& operator=(const HasPtr &rhs);
+	~HasPtr();
 private:
 	string *ps;
 	int i;
