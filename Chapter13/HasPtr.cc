@@ -2,16 +2,12 @@
 
 HasPtr& HasPtr::operator=(const HasPtr &rhs) {
 	auto str_copy = new string(*rhs.ps);
-	if(ps) {
-		delete ps;
-	}
+	delete ps;
 	ps = str_copy;
 	i = rhs.i;
 	return *this;
 }
 
 HasPtr::~HasPtr() {
-	if(ps) {
-		delete ps;
-	}
+	delete ps;
 }
