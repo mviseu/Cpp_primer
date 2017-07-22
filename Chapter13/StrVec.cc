@@ -1,18 +1,26 @@
 #include "StrVec.h"
 #include <string>
 #include <utility>
+#include <iostream>
 
 using std::string;
 using std::pair;
 using std::uninitialized_copy;
+using std::endl;
+using std::cout;
+
 
 allocator<string> StrVec::alloc;
 
-StrVec::StrVec(const StrVec &v) {
-	auto ret = alloc_n_copy(v.begin(), v.end());
-	element = ret.first;
-	first_free = cap = ret.second;
+
+StrVec::StrVec(initializer_list<string> il) {
+	initialize_alloc_n_copy(il.begin(), il.end());
 }
+
+StrVec::StrVec(const StrVec &v) {
+	initialize_alloc_n_copy(v.begin(), v.end());
+}
+
 
 StrVec &StrVec::operator=(const StrVec &rhs) {
 	auto ret = alloc_n_copy(rhs.element, rhs.first_free);
@@ -26,6 +34,21 @@ StrVec::~StrVec() {
 	free();
 }
 
+void StrVec::resize(size_t new_size) {
+	while(first_free > element + new_size) {
+		alloc.destroy(--first_free);
+	}
+	while(first_free < element + new_size) {
+		push_back(string());
+	}
+}
+
+void StrVec::reserve(size_t min_capacity) {
+	while(cap < element + min_capacity) {
+		reallocate_capacity();
+	}
+}
+
 void StrVec::push_back(const string &s) {
 	chk_n_alloc();
 	alloc.construct(first_free++, s);
@@ -36,9 +59,15 @@ pair<string *, string *>StrVec::alloc_n_copy(const string *b, const string *e) {
 	return {ret, uninitialized_copy(b, e, ret)};
 }
 
+void StrVec::initialize_alloc_n_copy(const string *b, const string *e) {
+	auto ret = alloc_n_copy(b, e);
+	element = ret.first;
+	first_free = cap = ret.second;
+}
+
 void StrVec::chk_n_alloc() {
 	if(size() == capacity()) {
-		reallocate();
+		reallocate_size();
 	}
 }
 
@@ -51,9 +80,17 @@ void StrVec::free() {
 	}
 }
 
-void StrVec::reallocate() {
-	auto new_size = (size() ? size() * 2 : 1) ;
-	auto ret = (size() ? alloc.allocate(size() * 2) : alloc.allocate(1));
+void StrVec::reallocate_size() {
+	reallocate(size());
+}
+
+void StrVec::reallocate_capacity() {
+	reallocate(capacity());
+}
+
+void StrVec::reallocate(size_t n) {
+	auto new_capacity = (n ? n * 2 : 1) ;
+	auto ret = alloc.allocate(new_capacity);
 	auto elem = element;
 	auto dest = ret;
 	for(size_t i = 0; i != size(); ++i) {
@@ -62,5 +99,5 @@ void StrVec::reallocate() {
 	free();
 	element = ret;
 	first_free = dest;
-	cap = element + new_size;
+	cap = element + new_capacity;
 }
