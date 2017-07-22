@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "StrVec.h"
 
 using std::shared_ptr;
 using std::weak_ptr;
