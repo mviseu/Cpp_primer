@@ -2,13 +2,13 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <algorithm>
 
 using std::string;
 using std::pair;
 using std::uninitialized_copy;
 using std::endl;
 using std::cout;
-
 
 allocator<string> StrVec::alloc;
 
@@ -73,9 +73,7 @@ void StrVec::chk_n_alloc() {
 
 void StrVec::free() {
 	if(element) {
-		while(first_free != element) {
-			alloc.destroy(--first_free);
-		}
+		std::for_each(element, first_free, [](const string &s){alloc.destroy(&s);});
 		alloc.deallocate(element, cap - element);
 	}
 }
