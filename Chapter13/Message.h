@@ -21,7 +21,9 @@ class Message {
 public:
 	Message(const string &s = "") : contents(s) {}
 	Message(const Message &);
+	Message(Message &&m);
 	Message &operator=(const Message &rhs);
+	Message &operator=(Message &&rhs);
 
 	void save(Folder &f);
 	void remove(Folder &f);
@@ -39,6 +41,7 @@ private:
 	set<Folder *>folders;
 	void add_to_folders(const Message &m);
 	void remove_from_folders();
+	void move_from_folders(Message *m);
 	void addFolder(Folder *f);
 	void remFolder(Folder *f);
 
