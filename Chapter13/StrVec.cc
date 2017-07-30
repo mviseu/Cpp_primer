@@ -19,14 +19,32 @@ StrVec::StrVec(initializer_list<string> il) {
 
 StrVec::StrVec(const StrVec &v) {
 	initialize_alloc_n_copy(v.begin(), v.end());
+	cout << "Copy constructor" << endl;
 }
 
+StrVec::StrVec(StrVec &&v) noexcept :
+	element(v.element), first_free(v.first_free), cap(v.cap) {
+	v.element = v.first_free = v.cap = nullptr;
+	cout << "Move constructor" << endl;
+}
 
 StrVec &StrVec::operator=(const StrVec &rhs) {
 	auto ret = alloc_n_copy(rhs.element, rhs.first_free);
 	free();
 	element = ret.first;
 	first_free = cap = ret.second;
+	cout << "Copy assignment" << endl;
+	return *this;
+}
+StrVec &StrVec::operator=(StrVec &&rhs) noexcept{
+	if(this != &rhs) {
+		free();
+		element = rhs.element;
+		first_free = rhs.first_free;
+		cap = rhs.cap;
+		rhs.element = rhs.first_free = rhs.cap = nullptr;
+	}
+	cout << "Move assignment" << endl;
 	return *this;
 }
 

@@ -26,6 +26,7 @@ String::String(String &&s) noexcept :
 	element(s.element), first_free(s.first_free), cap(s.cap) 
 {
 	s.first_free = s.cap = s.element = nullptr;
+	cout << "move-constructor" << endl;
 }
 
 String &String::operator=(const String &s) {
@@ -34,6 +35,18 @@ String &String::operator=(const String &s) {
 	element = data.first;
 	first_free = cap = data.second;
 	cout << "copy-assignment" << endl;
+	return *this;
+}
+
+String &String::operator=(String &&s) noexcept {
+	if(this != &s) {
+		free();
+		element = s.element;
+		first_free = s.first_free;
+		cap = s.cap;
+		s.first_free = s.cap = s.element = nullptr;
+	}
+	cout << "move-assignment" << endl;
 	return *this;
 }
 

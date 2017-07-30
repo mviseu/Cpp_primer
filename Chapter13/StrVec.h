@@ -13,8 +13,10 @@ class StrVec {
 public:
 	StrVec() : element(nullptr), first_free(nullptr), cap(nullptr) {}
 	StrVec(const StrVec &);
+	StrVec(StrVec &&) noexcept;
 	StrVec(initializer_list<string> il);
 	StrVec &operator=(const StrVec &);
+	StrVec &operator=(StrVec &&rhs) noexcept;
 	~StrVec();
 	void push_back(const string &s);
 	size_t size() const {return first_free - element;}
