@@ -47,4 +47,15 @@ ostream &operator<<(ostream &out, const Sales_data &S) {
   return out;
 }
 
+istream &operator>>(istream &in, Sales_data &S) {
+  double price;
+  in >> S.bookNo >> S.nr_units >> price;
+  if(in) {
+    S.revenue = S.nr_units * price;
+  } else {
+    S = Sales_data();
+  }
+  return in;
+}
+
 #endif
