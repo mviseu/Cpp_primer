@@ -8,10 +8,10 @@ using std::istream;
 using std::ostream;
 
 class Book {
-
-public:
 	friend ostream &operator<<(ostream &os, const Book &B);
 	friend istream &operator>>(istream &is, Book &B);
+	friend bool operator==(const Book &lhs, const Book &rhs); 
+public:
 	//non delegating
 	Book(const string &t, unsigned p, double w) :
 	title(t), nrPages(p), width(w) {}
@@ -44,4 +44,13 @@ istream &operator>>(istream &is, Book &B) {
 	}
 	return is;
 }
+
+bool operator==(const Book &lhs, const Book &rhs) {
+	return lhs.title == rhs.title && lhs.nrPages == rhs.nrPages && lhs.width == rhs.width;
+}
+
+bool operator!=(const Book &lhs, const Book &rhs) {
+	return !(lhs == rhs);
+}
+
 
