@@ -1,4 +1,4 @@
-#include "String.h"
+#include "14_16_String.h"
 #include <memory>
 #include <algorithm>
 #include <utility>
@@ -86,3 +86,11 @@ void String::reallocate() {
 }
 
 allocator<char> String::alloc; 
+
+bool operator==(const String &lhs, const String &rhs) {
+	return lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+bool operator!=(const String &lhs, const String &rhs) {
+	return !(lhs == rhs);
+}

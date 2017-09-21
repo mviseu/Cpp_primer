@@ -117,3 +117,11 @@ void StrVec::reallocate(size_t n) {
 	first_free = dest;
 	cap = element + new_capacity;
 }
+
+bool operator==(const StrVec &lhs, const StrVec &rhs) {
+	return lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+bool operator!=(const StrVec &lhs, const StrVec &rhs) {
+	return !(lhs == rhs);
+}

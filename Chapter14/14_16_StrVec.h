@@ -43,3 +43,7 @@ private:
 	string * first_free;
 	string * cap;
 };
+
+bool operator==(const StrVec &lhs, const StrVec &rhs);
+
+bool operator!=(const StrVec &lhs, const StrVec &rhs);

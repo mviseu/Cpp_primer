@@ -34,3 +34,6 @@ private:
 	char *cap = nullptr;
 	static allocator<char> alloc; 
 };
+
+bool operator==(const String &lhs, const String &rhs);
+bool operator!=(const String &lhs, const String &rhs);
