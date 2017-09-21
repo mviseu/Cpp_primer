@@ -38,3 +38,15 @@ StrBlobPtr &StrBlobPtr::incr() {
 	++curr;
 	return *this;
 }
+
+bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs) {
+	if(lhs.wkpr.lock() && rhs.wkpr.lock()) {
+		return *lhs.wkpr.lock() == *rhs.wkpr.lock() && lhs.curr == rhs.curr;
+	}
+	//includes nullptr case
+	return lhs.wkpr.lock() == rhs.wkpr.lock() && lhs.curr == rhs.curr;
+}
+
+bool operator!=(const StrBlobPtr &lhs, const StrBlobPtr &rhs) {
+	return !(rhs == lhs);
+}

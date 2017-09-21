@@ -13,6 +13,7 @@ using std::size_t;
 class StrBlob;
 
 class StrBlobPtr {
+	friend bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 public:
 	StrBlobPtr() {};
 	StrBlobPtr(StrBlob &sptr, size_t i);
@@ -24,3 +25,6 @@ private:
 	weak_ptr<vector<string>> wkpr;
 	size_t curr = 0;
 };
+
+bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+bool operator!=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);

@@ -59,7 +59,11 @@ vector<string> *StrBlob::get() const {
 }
 
 bool operator==(const StrBlob &lhs, const StrBlob &rhs) {
-  return *lhs.data == *rhs.data;
+  if(lhs.data && rhs.data) {
+    return *lhs.data == *rhs.data;
+  }
+  // includes nullptr case
+  return lhs.data == rhs.data;
 }
 
 bool operator!=(const StrBlob &lhs, const StrBlob &rhs) {
