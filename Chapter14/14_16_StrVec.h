@@ -17,6 +17,8 @@ public:
 	StrVec(initializer_list<string> il);
 	StrVec &operator=(const StrVec &);
 	StrVec &operator=(StrVec &&rhs) noexcept;
+	const string &operator[](std::size_t i) const;
+	string &operator[](std::size_t i);
 	~StrVec();
 	void push_back(const string &s);
 	size_t size() const {return first_free - element;}

@@ -48,6 +48,14 @@ StrVec &StrVec::operator=(StrVec &&rhs) noexcept{
 	return *this;
 }
 
+const string &StrVec::operator[](std::size_t i) const {
+	return element[i];
+}
+
+string &StrVec::operator[](std::size_t i) {
+	return element[i];
+}
+
 StrVec::~StrVec() {
 	free();
 }

@@ -23,6 +23,9 @@ public:
   StrBlob();
   StrBlob(const initializer_list<string> &il);
 
+  const string &operator[](std::size_t i) const;
+  string &operator[](std::size_t i);
+
   size_type size() const;
   bool empty() const;
 

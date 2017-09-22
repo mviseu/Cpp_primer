@@ -17,6 +17,8 @@ public:
 	String(String &&s) noexcept;
 	String &operator=(const String &);
 	String &operator=(String &&s) noexcept;
+	const char &operator[](std::size_t i) const;
+	char &operator[](std::size_t i);
 	~String() {free(); cout << "destructor" << endl;}
 	void push_back(char c);
 	size_t size() const {return first_free - element;}

@@ -17,6 +17,15 @@ StrBlob::StrBlob()
     : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(const initializer_list<string> &il)
     : data(make_shared<vector<string>>(il)) {}
+
+const string &StrBlob::operator[](std::size_t i) const {
+  return (*data)[i];  
+}
+
+string &StrBlob::operator[](std::size_t i) {
+  return (*data)[i];
+}
+
 StrBlob::size_type StrBlob::size() const { return data->size(); }
 bool StrBlob::empty() const { return data->empty(); }
 

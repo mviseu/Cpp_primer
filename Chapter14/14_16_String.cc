@@ -50,6 +50,14 @@ String &String::operator=(String &&s) noexcept {
 	return *this;
 }
 
+const char &String::operator[](std::size_t i) const {
+	return element[i];
+}
+
+char &String::operator[](std::size_t i) {
+	return element[i];
+}
+
 void String::push_back(char c) {
 	reallocate_if_needed();
 	alloc.construct(first_free++, c);
