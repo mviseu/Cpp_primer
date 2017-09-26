@@ -17,6 +17,7 @@ public:
 	StrVec(initializer_list<string> il);
 	StrVec &operator=(const StrVec &);
 	StrVec &operator=(StrVec &&rhs) noexcept;
+	StrVec &operator=(std::initializer_list<std::string> il);
 	const string &operator[](std::size_t i) const;
 	string &operator[](std::size_t i);
 	~StrVec();
@@ -49,3 +50,11 @@ private:
 bool operator==(const StrVec &lhs, const StrVec &rhs);
 
 bool operator!=(const StrVec &lhs, const StrVec &rhs);
+
+bool operator<(const StrVec &lhs, const StrVec &rhs);
+
+bool operator>(const StrVec &lhs, const StrVec &rhs);
+
+bool operator<=(const StrVec &lhs, const StrVec &rhs);
+
+bool operator>=(const StrVec &lhs, const StrVec &rhs);

@@ -14,17 +14,33 @@ class StrBlob;
 
 class StrBlobPtr {
 	friend bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+	friend bool operator<(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 public:
 	StrBlobPtr() {};
 	StrBlobPtr(StrBlob &sptr, size_t i);
+  	StrBlobPtr &operator+=(size_t i);
+  	StrBlobPtr &operator-=(size_t i);
+	StrBlobPtr &operator++();
+	StrBlobPtr &operator--();
+	StrBlobPtr operator++(int);
+	StrBlobPtr operator--(int);
+	const char &operator[](std::size_t i) const;
+	char &operator[](std::size_t i);
 	string &deref() const;
 	StrBlobPtr &incr();
 
 private:
 	shared_ptr<vector<string>> check(size_t i, const string &mess) const;
+	char &do_subscript(std::size_t i) const;
 	weak_ptr<vector<string>> wkpr;
 	size_t curr = 0;
 };
 
 bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 bool operator!=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+bool operator<(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+bool operator>(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+bool operator>=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+bool operator<=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+StrBlobPtr operator+(const StrBlob &lhs, size_t i);
+StrBlobPtr operator-(const StrBlob &lhs, size_t i);

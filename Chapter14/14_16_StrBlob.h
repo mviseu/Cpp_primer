@@ -16,6 +16,7 @@ class StrBlobPtr;
 class StrBlob {
   friend class StrBlobPtr;
   friend bool operator==(const StrBlob &lhs, const StrBlob &rhs);
+  friend bool operator<(const StrBlob &lhs, const StrBlob &rhs);
 
 public:
   using size_type = vector<string>::size_type;
@@ -52,3 +53,7 @@ private:
 
 bool operator==(const StrBlob &lhs, const StrBlob &rhs);
 bool operator!=(const StrBlob &lhs, const StrBlob &rhs);
+bool operator<(const StrBlob &lhs, const StrBlob &rhs);
+bool operator>(const StrBlob &lhs, const StrBlob &rhs);
+bool operator<=(const StrBlob &lhs, const StrBlob &rhs);
+bool operator>=(const StrBlob &lhs, const StrBlob &rhs);

@@ -68,13 +68,25 @@ vector<string> *StrBlob::get() const {
 }
 
 bool operator==(const StrBlob &lhs, const StrBlob &rhs) {
-  if(lhs.data && rhs.data) {
-    return *lhs.data == *rhs.data;
-  }
-  // includes nullptr case
-  return lhs.data == rhs.data;
+  return *lhs.data == *rhs.data;
 }
 
 bool operator!=(const StrBlob &lhs, const StrBlob &rhs) {
   return !(lhs == rhs);
+}
+
+bool operator<(const StrBlob &lhs, const StrBlob &rhs) {
+  return std::lexicographical_compare((*lhs.data).begin(), (*lhs.data).end(), (*rhs.data).begin(), (*rhs.data).end());
+}
+
+bool operator>(const StrBlob &lhs, const StrBlob &rhs) {
+  return rhs < lhs;
+}
+
+bool operator<=(const StrBlob &lhs, const StrBlob &rhs) {
+  return !(rhs < lhs);
+}
+
+bool operator>=(const StrBlob &lhs, const StrBlob &rhs) {
+  return !(lhs < rhs);
 }

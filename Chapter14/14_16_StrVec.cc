@@ -19,13 +19,11 @@ StrVec::StrVec(initializer_list<string> il) {
 
 StrVec::StrVec(const StrVec &v) {
 	initialize_alloc_n_copy(v.begin(), v.end());
-	cout << "Copy constructor" << endl;
 }
 
 StrVec::StrVec(StrVec &&v) noexcept :
 	element(v.element), first_free(v.first_free), cap(v.cap) {
 	v.element = v.first_free = v.cap = nullptr;
-	cout << "Move constructor" << endl;
 }
 
 StrVec &StrVec::operator=(const StrVec &rhs) {
@@ -33,7 +31,6 @@ StrVec &StrVec::operator=(const StrVec &rhs) {
 	free();
 	element = ret.first;
 	first_free = cap = ret.second;
-	cout << "Copy assignment" << endl;
 	return *this;
 }
 StrVec &StrVec::operator=(StrVec &&rhs) noexcept{
@@ -44,7 +41,14 @@ StrVec &StrVec::operator=(StrVec &&rhs) noexcept{
 		cap = rhs.cap;
 		rhs.element = rhs.first_free = rhs.cap = nullptr;
 	}
-	cout << "Move assignment" << endl;
+	return *this;
+}
+
+StrVec &StrVec::operator=(std::initializer_list<std::string> il) {
+	auto ret = alloc_n_copy(il.begin(), il.end());
+	free();
+	element = ret.first;
+	first_free = cap = ret.second;
 	return *this;
 }
 
@@ -132,4 +136,20 @@ bool operator==(const StrVec &lhs, const StrVec &rhs) {
 
 bool operator!=(const StrVec &lhs, const StrVec &rhs) {
 	return !(lhs == rhs);
+}
+
+bool operator<(const StrVec &lhs, const StrVec &rhs) {
+	return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+bool operator>(const StrVec &lhs, const StrVec &rhs) {
+	return rhs < lhs;
+}
+
+bool operator<=(const StrVec &lhs, const StrVec &rhs) {
+	return !(rhs < lhs);
+}
+
+bool operator>=(const StrVec &lhs, const StrVec &rhs) {
+	return !(lhs < rhs);
 }
