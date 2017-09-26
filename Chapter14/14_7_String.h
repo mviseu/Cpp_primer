@@ -38,3 +38,9 @@ private:
 };
 
 ostream &operator<<(ostream &os, const String &S);
+bool operator==(const String &lhs, const String &rhs);
+bool operator!=(const String &lhs, const String &rhs);
+bool operator<(const String &lhs, const String &rhs);
+bool operator<=(const String &lhs, const String &rhs);
+bool operator>=(const String &lhs, const String &rhs);
+bool operator>(const String &lhs, const String &rhs);

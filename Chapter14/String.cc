@@ -96,3 +96,30 @@ ostream &operator<<(ostream &os, const String &S) {
 	return os;
 }
 
+bool operator==(const String &lhs, const String &rhs) {
+	if(lhs.size() != rhs.size()) {
+		return false;
+	}
+	return std::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+bool operator!=(const String &lhs, const String &rhs) {
+	return !(lhs == rhs);
+}
+
+bool operator<(const String &lhs, const String &rhs) {
+	return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+bool operator<=(const String &lhs, const String &rhs) {
+	return !(rhs < lhs);
+}
+
+bool operator>=(const String &lhs, const String &rhs) {
+	return !(lhs < rhs);
+}
+
+bool operator>(const String &lhs, const String &rhs) {
+	return rhs < lhs;
+}
+
