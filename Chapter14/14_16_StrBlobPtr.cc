@@ -29,16 +29,15 @@ shared_ptr<vector<string>> StrBlobPtr::check(size_t i, const string &mess) const
 }
 
 
-StrBlobPtr &StrBlobPtr::operator+=(size_t i) {
+StrBlobPtr &StrBlobPtr::operator+=(int i) {
 	curr += i;
-	check(++curr, "Iterator arithmetic past the off-the-end");
+	auto curr_lower = curr - 1;
+	i > 0 ? check(curr_lower, "Iterator arithmetic past the off-the-end") : check(curr, "Iterator arithmetic before start");
 	return *this;
 }
 
-StrBlobPtr &StrBlobPtr::operator-=(size_t i) {
-	curr += -i;
-	check(curr, "Iterator arithmetic past the beginning");
-	return *this;
+StrBlobPtr &StrBlobPtr::operator-=(int i) {
+	return *this += -i;
 }
 
 string &StrBlobPtr::deref() const {
@@ -120,19 +119,21 @@ bool operator<=(const StrBlobPtr &lhs, const StrBlobPtr &rhs) {
 	return !(rhs < lhs);
 }
 
-StrBlobPtr operator+(const StrBlobPtr &lhs, size_t i) {
+StrBlobPtr operator+(const StrBlobPtr &lhs, int i) {
 	StrBlobPtr ret = lhs;
-	ret += i;
-	return ret;
+	return ret += i;
 }
 
-StrBlobPtr operator-(const StrBlobPtr &lhs, size_t i) {
+StrBlobPtr operator-(const StrBlobPtr &lhs, int i) {
 	StrBlobPtr ret = lhs;
-	ret += -i;
-	return ret;
+	return ret += -i;
 }
 
-//missing
-/* int for += with check function
+int operator-(const StrBlobPtr &lhs, const StrBlobPtr &rhs) {
+	return lhs.curr - rhs.curr;
+}
+
+/*missing
+//conversion from int to StrBlobPtr
 subtracting two iterators
 */

@@ -51,6 +51,8 @@ int main() {
 		os = "p2 is more than p1";
 	}
 	std::cout << p1[0] << p1[1] << p1[2] << p1[3] << std::endl;
+	auto pnew = p1++;
+	std::cout << pnew - p1 << std::endl;
 
 	if(s1 == s2) {
 		os = "s1 and s2 are equal";

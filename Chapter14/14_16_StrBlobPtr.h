@@ -15,11 +15,12 @@ class StrBlob;
 class StrBlobPtr {
 	friend bool operator==(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 	friend bool operator<(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
+	friend int operator-(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 public:
 	StrBlobPtr() {};
 	StrBlobPtr(StrBlob &sptr, size_t i);
-  	StrBlobPtr &operator+=(size_t i);
-  	StrBlobPtr &operator-=(size_t i);
+  	StrBlobPtr &operator+=(int i);
+  	StrBlobPtr &operator-=(int i);
 	StrBlobPtr &operator++();
 	StrBlobPtr &operator--();
 	StrBlobPtr operator++(int);
@@ -42,5 +43,6 @@ bool operator<(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 bool operator>(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 bool operator>=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
 bool operator<=(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
-StrBlobPtr operator+(const StrBlob &lhs, size_t i);
-StrBlobPtr operator-(const StrBlob &lhs, size_t i);
+StrBlobPtr operator+(const StrBlobPtr &lhs, int i);
+StrBlobPtr operator-(const StrBlobPtr &lhs, int i);
+int operator-(const StrBlobPtr &lhs, const StrBlobPtr &rhs);
