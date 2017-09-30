@@ -15,11 +15,16 @@ public:
 
 
 int main() {
-/*	std::ifstream input("testfile");
 	ReadLine read_line;
-	std::vector<std::string>vec;
-	std::cout << read_line(std::cin) << std::endl;
-	for(auto status = read_line(input); !(status.empty()); vec.push_back(status));
-	std::copy(vec.begin(), vec.end(), std::ostream_iterator<std::string>(std::cout, " "));/*/
+	auto status = read_line(std::cin);
+	std::vector<std::string> vec;
+
+	while(!(status.empty())) {
+		vec.push_back(status);
+		status = read_line(std::cin);
+
+	}
+
+	std::copy(vec.begin(), vec.end(), std::ostream_iterator<std::string>(std::cout, " "));
 	return 0;
 }
