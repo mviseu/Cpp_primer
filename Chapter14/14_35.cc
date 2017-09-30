@@ -7,7 +7,7 @@
 
 class ReadLine {
 public:
-	std::string operator() (std::istream &is) {
+	std::string operator() (std::istream &is) const {
 		std::string s;
 		return (getline(is, s) ? s : std::string());
 	}
