@@ -1,7 +1,6 @@
 #include "Query.h"
 #include "TextQuery.h"
 #include "QueryResult.h"
-
 #include <fstream>
 #include <iostream>
 
@@ -10,9 +9,10 @@ int main() {
 
 	TextQuery text(file);
 	Query qr("Alice");
-	print(std::cout, qr.eval(text));
-	std::cout << qr.rep() << std::endl;
-	(~qr).eval(text);
-	print(std::cout, (~qr).eval(text));
+	Query qr2("her");
+	Query qr3("red");
+	print(std::cout, qr2.eval(text));
+	print(std::cout, (qr & qr3).eval(text));
+	print(std::cout, (qr | qr2).eval(text));
 	return 0;
 }	
