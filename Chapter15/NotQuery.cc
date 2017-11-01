@@ -5,6 +5,7 @@
 #include <memory>
 
 QueryResult NotQuery::eval(const TextQuery &tq) const {
+	std::cout << "NotQuery eval" << std::endl;
 	auto yes_result = qr.eval(tq);
 	auto yes_line_n = yes_result.begin(), yes_line_end = yes_result.end();
 

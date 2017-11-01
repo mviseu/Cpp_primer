@@ -17,3 +17,7 @@ Query operator&(const Query &lhs, const Query &rhs) {
 Query operator|(const Query &lhs, const Query &rhs) {
 	return std::shared_ptr<BaseQuery>(new OrQuery(lhs, rhs));
 }
+
+std::ostream &operator<<(std::ostream &os, const Query &q) {
+	return os << q.rep();
+}

@@ -3,11 +3,11 @@
 #include "BinaryQuery.h"
 #include "TextQuery.h"
 #include "QueryResult.h"
-
+#include <iostream>
 #include <string>
 
 class AndQuery : public BinaryQuery {
 	friend Query operator&(const Query &lhs, const Query &rhs);
-	AndQuery(const Query &lhs, const Query &rhs) : BinaryQuery(lhs, rhs, "&") {}
+	AndQuery(const Query &lhs, const Query &rhs) : BinaryQuery(lhs, rhs, "&") {std::cout << "AndQuery constructor" << std::endl;}
 	QueryResult eval(const TextQuery &tq) const;	
 };

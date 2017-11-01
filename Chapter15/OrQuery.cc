@@ -8,6 +8,7 @@
 #include <iterator>
 
 QueryResult OrQuery::eval(const TextQuery &tq) const {
+	std::cout << "OrQuery eval" << std::endl;
 	auto lhs_result = lhs.eval(tq);
 	auto rhs_result = rhs.eval(tq);	
 	auto lines = std::make_shared<set<line_no>>(lhs_result.begin(), lhs_result.end());
