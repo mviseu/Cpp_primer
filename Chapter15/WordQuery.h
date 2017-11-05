@@ -12,11 +12,11 @@ class WordQuery : public BaseQuery {
 		#endif
 	}
 
-	QueryResult eval(const TextQuery &tq) const {
+	QueryResult eval(const TextQuery &tq, line_no range_start, line_no range_end) const {
 		#ifdef VERBOSE
 			std::cout << "WordQuery eval" << std::endl; 
 		#endif
-		return tq.query(word);
+		return tq.query(word, range_start, range_end);
 	}
 	std::string rep() const {
 		#ifdef VERBOSE
@@ -27,3 +27,4 @@ class WordQuery : public BaseQuery {
 
 	std::string word;
 };
+  

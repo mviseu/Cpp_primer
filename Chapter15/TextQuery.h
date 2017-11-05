@@ -20,7 +20,7 @@ class TextQuery
 {
 public:
 	TextQuery(ifstream &input);
-	QueryResult query(const string &word) const;
+	QueryResult query(const string &word, std::size_t range_start, std::size_t range_end) const;
 
 private:
 	StrBlob file;

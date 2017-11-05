@@ -13,6 +13,7 @@ class Query {
 friend Query operator~(const Query &qr);
 friend Query operator|(const Query &lhs, const Query &rhs);
 friend Query operator&(const Query &lhs, const Query &rhs);
+using line_no = std::vector<std::string>::size_type;
 
 public:
 	Query(const std::string &wd) : qr(new WordQuery(wd)) {
@@ -20,11 +21,11 @@ public:
 			std::cout << "Query string constructor" << std::endl;
 		#endif
 	}
-	QueryResult eval(const TextQuery &tq) const {
+	QueryResult eval(const TextQuery &tq, line_no range_start, line_no range_end) const {
 		#ifdef VERBOSE
 			std::cout << "Query eval" << std::endl;
 		#endif
-		return qr -> eval(tq);
+		return qr -> eval(tq, range_start, range_end);
 	}
 	std::string rep() const {
 		#ifdef VERBOSE

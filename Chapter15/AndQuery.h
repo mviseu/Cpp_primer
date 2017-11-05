@@ -13,5 +13,5 @@ class AndQuery : public BinaryQuery {
 			std::cout << "AndQuery constructor" << std::endl;
 		#endif
 	}
-	QueryResult eval(const TextQuery &tq) const;	
+	QueryResult eval(const TextQuery &tq, line_no range_start, line_no range_end) const;	
 };

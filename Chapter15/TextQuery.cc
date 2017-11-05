@@ -20,7 +20,6 @@ using std::endl;
 using std::make_pair;
 
 TextQuery::TextQuery(ifstream &input) : file() {
-
 	for(string line; getline(input, line); ) {
 		file.push_back(line);
 		auto i = file.size() - 1;
@@ -30,7 +29,6 @@ TextQuery::TextQuery(ifstream &input) : file() {
 			wm.insert(make_pair(word, new set<size_t>()));
 			wm[word] -> insert(i);
 		}
-
 	}
 }
 
@@ -45,11 +43,13 @@ void TextQuery::printMap() {
 	}
 }
 
-QueryResult TextQuery::query(const string &word) const {
+QueryResult TextQuery::query(const string &word, std::size_t range_start, std::size_t range_end) const {
 	auto ret = wm.find(word);
 	if(ret == wm.end()) {
 		return QueryResult(word, file, make_shared<set<size_t>>());
 	} else {
-		return QueryResult(word, file, ret -> second);
+		auto lines_ptr = std::make_shared<std::set<std::size_t>>((*ret-> second).lower_bound(range_start - 1),
+																((*ret->second).upper_bound(range_end - 1)));
+		return QueryResult(word, file, lines_ptr);
 	}
 }

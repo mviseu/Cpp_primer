@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <utility>
 #include "StrBlob.h"
 
 using std::shared_ptr;
