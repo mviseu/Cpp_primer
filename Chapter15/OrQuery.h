@@ -7,6 +7,10 @@
 
 class OrQuery : public BinaryQuery {
 	friend Query operator|(const Query &lhs, const Query &rhs);
-	OrQuery(const Query &lhs, const Query &rhs) : BinaryQuery(lhs, rhs, "|") {std::cout << "OrQuery constructor" << std::endl;}
+	OrQuery(const Query &lhs, const Query &rhs) : BinaryQuery(lhs, rhs, "|") {
+		#ifdef VERBOSE
+			std::cout << "OrQuery constructor" << std::endl;
+		#endif
+	}
 	QueryResult eval(const TextQuery &tq) const;
 };

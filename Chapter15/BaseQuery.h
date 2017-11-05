@@ -9,7 +9,11 @@
 class BaseQuery {
 friend class Query;
 protected:
-	BaseQuery() {std::cout << "BaseQuery default constructor" << std::endl;}
+	BaseQuery() {
+		#ifdef VERBOSE
+			std::cout << "BaseQuery default constructor" << std::endl;
+		#endif
+	}
 	using line_no = std::vector<std::string>::size_type;
 	virtual ~BaseQuery() = default;
 private:

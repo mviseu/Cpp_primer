@@ -6,10 +6,24 @@
 
 class WordQuery : public BaseQuery {
 	friend class Query;
-	WordQuery(const std::string &wd) : word(wd) {std::cout << "WordQuery constructor" << std::endl;}
+	WordQuery(const std::string &wd) : word(wd) {
+		#ifdef VERBOSE
+			std::cout << "WordQuery constructor" << std::endl;
+		#endif
+	}
 
-	QueryResult eval(const TextQuery &tq) const {std::cout << "WordQuery eval" << std::endl; return tq.query(word);}
-	std::string rep() const {std::cout << "WordQuery rep" << std::endl; return word; }
+	QueryResult eval(const TextQuery &tq) const {
+		#ifdef VERBOSE
+			std::cout << "WordQuery eval" << std::endl; 
+		#endif
+		return tq.query(word);
+	}
+	std::string rep() const {
+		#ifdef VERBOSE
+			std::cout << "WordQuery rep" << std::endl; 
+		#endif
+		return word; 
+	}
 
 	std::string word;
 };
