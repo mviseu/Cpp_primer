@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 using std::string;
 using std::shared_ptr;
@@ -19,7 +20,7 @@ template <typename T> bool operator<(const Blob<T> &lhs, const Blob<T> &rhs);
 template <typename T> class Blob {
   friend class BlobPtr<T>;
   friend bool operator==<T>(const Blob &lhs, const Blob &rhs);
-  friend bool operator<<T>(const Blob &lhs, const Blob &rhs);
+  friend bool operator< <T>(const Blob &lhs, const Blob &rhs); //space!
 
 public:
   using size_type = typename vector<T>::size_type;
@@ -68,7 +69,7 @@ private:
   }
   void check(size_type i, const string &message) const {
     if (i >= data->size()) {
-      throw out_of_range(message);
+      throw std::out_of_range(message);
     }
   }
 };

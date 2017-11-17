@@ -2,6 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 using std::shared_ptr;
 using std::weak_ptr;
@@ -17,7 +18,7 @@ template <typename T> class Blob;
 
 template <typename T> class BlobPtr {
 	friend bool operator==<T>(const BlobPtr &lhs, const BlobPtr &rhs);
-	friend bool operator<<T>(const BlobPtr &lhs, const BlobPtr &rhs);
+	friend bool operator< <T>(const BlobPtr &lhs, const BlobPtr &rhs);
 	friend int operator-<T>(const BlobPtr &lhs, const BlobPtr &rhs);
 public:
 	using value_type = typename T::value_type;
@@ -70,10 +71,10 @@ private:
 	shared_ptr<vector<T>> check(size_t i, const string &mess) const {
 		auto sptr = wkpr.lock();
 		if(!sptr) {
-			throw runtime_error("Unbound BlobPtr");
+			throw std::runtime_error("Unbound BlobPtr");
 		}
 		if(i >= sptr -> size()) {
-			throw out_of_range(mess);
+			throw std::out_of_range(mess);
 		}
 		return sptr;
 	}
