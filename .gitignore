@@ -3,3 +3,4 @@ outfile
 *.out
 *.out.stackdump
 *.o
+*.exe
