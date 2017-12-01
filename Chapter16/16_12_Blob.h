@@ -27,6 +27,7 @@ public:
   
   Blob() : data(make_shared<vector<T>>()) {}
   Blob(const initializer_list<T> &il) : data(make_shared<vector<T>>(il)) {}
+  template <typename It> Blob(It beg, It end) : data(make_shared<vector<T>>(beg, end)) {}
 
 
   const T &operator[](std::size_t i) const {return (*data)[i];} 

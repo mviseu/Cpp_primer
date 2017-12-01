@@ -20,15 +20,16 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
-TextQuery::TextQuery(ifstream &input) : file() {
-
+TextQuery::TextQuery(ifstream &input) {
 	for(string line; getline(input, line); ) {
 		file.push_back(line);
 		auto i = file.size() - 1;
 		istringstream input_line((*file.get())[i]);
 		string word;
 		while(input_line >> word) {
+			std:: cout << "Before" << std::endl;
 			wm.insert(make_pair(word, std::shared_ptr<set<size_t>>(new set<size_t>(), DebugDelete())));
+			std:: cout << "After" << word << std::endl;
 			wm[word] -> insert(i);
 		}
 

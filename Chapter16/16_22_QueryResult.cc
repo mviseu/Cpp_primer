@@ -38,5 +38,5 @@ QueryResult::SetIter QueryResult::end() const {
 }
 
 shared_ptr<StrBlob> QueryResult::get_file() const {
-	return std::shared_ptr<StrBlob>(new StrBlob(file), DebugDelete());
+	return make_shared<StrBlob>(StrBlob(file));
 }

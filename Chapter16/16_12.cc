@@ -49,5 +49,13 @@ int main() {
 	std::cout << p1[0] << p1[1] << p1[2] << p1[3] << std::endl;
 	auto pnew = p1++;
 	std::cout << pnew - p1 << std::endl;
+
+	//16.24
+	int arr[] = {0, 1, 2, 3};
+	Blob<int> blob(std::begin(arr), std::end(arr));
+	vector<long> vec({3, 4, 5});
+	Blob<long> blob2(vec.begin(), vec.end());
+	vector<string> vecStr = {"Hello", "new", "world"};
+	Blob<string> blob3(vecStr.begin(), vecStr.end());
 	return 0;
 }

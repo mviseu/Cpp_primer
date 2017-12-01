@@ -1,5 +1,6 @@
 #include "16_22_StrBlob.h"
 #include "16_22_StrBlobPtr.h"
+#include "DebugDelete.h"
 
 #include <initializer_list>
 #include <memory>
@@ -11,12 +12,12 @@ using std::string;
 using std::vector;
 using std::initializer_list;
 using std::make_shared;
-using std::out_of_range
-;
+using std::out_of_range;
+
 StrBlob::StrBlob()
-    : data(make_shared<vector<string>>()) {}
+    : data(std::shared_ptr<vector<string>>(new vector<string>(), DebugDelete())) {}
 StrBlob::StrBlob(const initializer_list<string> &il)
-    : data(make_shared<vector<string>>(il)) {}
+    : data(std::shared_ptr<vector<string>>(new vector<string>({il}), DebugDelete())) {}
 StrBlob::size_type StrBlob::size() const { return data->size(); }
 bool StrBlob::empty() const { return data->empty(); }
 
