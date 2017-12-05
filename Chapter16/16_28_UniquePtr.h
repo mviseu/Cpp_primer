@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <memory>
 #include <functional>
 #include <stdexcept>
@@ -22,10 +23,11 @@ public:
 	UniquePtr &operator=(const UniquePtr &rhs) = delete;
 
 	UniquePtr &operator=(UniquePtr &&rhs) noexcept {
+		std::cout << "move unique ptr" << std::endl;
 		if(&rhs != this) {
 			decrement_andif_destroy();
 			ptr = rhs.ptr;
-			deleter = rhs.deleter;
+			deleter = std::move(rhs.deleter);
 			rhs.ptr = nullptr;
 		}
 		return *this;
@@ -37,7 +39,7 @@ public:
 	}
 	//see if deleter is maintained post release
 	T* release() {auto ptr_copy = ptr; ptr = nullptr; return ptr_copy;}
-	void reset(T *rhs_ptr = nullptr, const D &rhs_deleter =  [](T*p){delete p;});
+	void reset(T *rhs_ptr = nullptr);
 	T &operator*() const;
 	T *operator->() const;
 	explicit operator bool() const;
@@ -89,16 +91,37 @@ template <typename T, typename D> void UniquePtr<T, D>::swap(UniquePtr &rhs) {
 }
 
 
-template <typename T, typename D> void UniquePtr<T, D>::reset(T *bptr, const D &del) {
+template <typename T, typename D> void UniquePtr<T, D>::reset(T *bptr) {
 	decrement_andif_destroy();
 	ptr = bptr;
-	deleter = del;
 }
 
 /*
+Release
+- Release sets the ptr to null and keeps the deleter
+*/
+
+
+/*
+On Reset
+- For Unique Ptr reset also keeps the old deleter if nothing else is specified (it is part of the type)
+- Shared Ptr does not keep the old deleter upon reset
+*/
+
+
+/*
+Shared Ptr - construct and assign
+
+	move-assign moves the deleter
+	copy-assign does not copy the deleter
+	Same with copy/move constructors
+
+*/
+
+
+/*
 TODO
-- see if deleter is maintained post-release
-- Does reset accept deleter?
 - why does debugdelete swap not work:
 - review
+- Add a uniqueptr constructor to sharedptr class
 */

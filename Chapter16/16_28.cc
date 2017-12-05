@@ -5,9 +5,11 @@
 #include <memory>
 #include <string>
 
+using std::unique_ptr;
+using std::shared_ptr;
 
 int main() {
-	{
+	/*{
 		SharedPtr<std::string> sptr_string(new std::string("Hello"));
 		SharedPtr<int> sptr(new int(4));
 		//SharedPtr<std::string> ptr_default;
@@ -24,39 +26,39 @@ int main() {
 		std::cout << sptr_copy_construct.use_count() << std::endl;
 		std::cout << sptr_copy_construct.unique() << std::endl;
 
-		/*sptr_debug.swap(sptr);
-		std::cout << *sptr_debug << std::endl;*/
+		sptr_debug.swap(sptr);
+		std::cout << *sptr_debug << std::endl;
 
 		
-		/*std::shared_ptr<int> sptr_debug(new int(2), DebugDelete());
+		std::shared_ptr<int> sptr_debug(new int(2), DebugDelete());
 		{
 			std::shared_ptr<int> sptr_debug_copy(std::move(sptr_debug));
 			//deleted debug
 		}
-		*/
+		
 
-		/*SharedPtr<int> sptr_debug(new int(2), DebugDelete());
+		SharedPtr<int> sptr_debug(new int(2), DebugDelete());
 		{
 			SharedPtr<int> sptr_debug_copy(std::move(sptr_debug));
 			//deleted debug
 		}
 		std::cout << "End of scope of second ptr" << std::endl;
-		*/
+		
 
-		/*
+		
 		std::shared_ptr<int> sptr_debug(new int(2), DebugDelete());
 		{
 			std::shared_ptr<int> sptr_assign(new int(3));
 			sptr_assign = std::move(sptr_debug);
 		}
 		std::cout << "End of scope of second ptr" << std::endl;
-		*/
+		
 
-		/*
+		
 		move-assign moves the deleter
 		copy-assign does not copy the deleter
 		Same with copy/move constructors
-		*/
+		
 
 
 		SharedPtr<int> sptr_debug(new int(2), DebugDelete());
@@ -78,23 +80,24 @@ int main() {
 
 		SharedPtr<int> sptr_test(nullptr);
 		std::cout << sptr_test.use_count() << std::endl;
+		
 
-		/*
+		
 			When constructing with nullptr, use_count = 0.
 			When reset with nullptr, error -> we haven't enforced this behaviour yet
-		*/
+		
 
 		SharedPtr<int> some_ptr(nullptr);
 		SharedPtr<int> another_ptr(new int(3));
 		another_ptr = some_ptr;
 		std::cout << another_ptr.use_count() << std::endl;
-	}
+	}*/
 
-	std::cout << "Unique ptr" << std::endl;
+	//std::cout << "Unique ptr" << std::endl;
 
 	// unique pointer
 
-	UniquePtr<std::string, DebugDelete> uptr_string(new std::string("Hello"), DebugDelete());
+	/*UniquePtr<std::string, DebugDelete> uptr_string(new std::string("Hello"), DebugDelete());
 	UniquePtr<int> uptr(new int(4));
 	UniquePtr<int> uptr_default(new int(6));
 
@@ -107,7 +110,22 @@ int main() {
 	if(uptr_string) {
 		std::cout << uptr_string->size() << std::endl;
 		std::cout << *uptr_string.get() << std::endl;
+	}*/
+
+	/*int *ptr = nullptr;
+	{
+		unique_ptr<int, DebugDelete> uptr_debug(new int(2), DebugDelete());
+		ptr = uptr_debug.release();
+		uptr_debug.reset(new int(2));
 	}
+	std::cout << "End of uptr_debug scope" << std::endl;
+	*/
+
+	{
+		UniquePtr<int> sptr_debug(new int(2));
+		sptr_debug = std::move(UniquePtr<int>(new int(2)));
+	}
+	std::cout << "End of sptr_debug scope" << std::endl;
 
 
 	return 0;

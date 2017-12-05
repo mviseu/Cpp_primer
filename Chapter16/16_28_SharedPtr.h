@@ -43,7 +43,7 @@ public:
 		if(&rhs != this) {
 			decrement_andif_destroy();
 			copy_ptr_and_count(rhs);
-			deleter = rhs.deleter;
+			deleter = std::move(rhs.deleter);
 			set_ptrs_to_null(rhs);
 		}
 		return *this;
@@ -53,8 +53,7 @@ public:
 	~SharedPtr() {
 		reset();
 	}
-	void reset();
-	void reset(T *rhs_ptr, const std::function<void(T*)> &rhs_deleter = nullptr);
+	void reset(T *rhs_ptr = nullptr, const std::function<void(T*)> &rhs_deleter = nullptr);
 	T &operator*() const;
 	T *operator->() const;
 	explicit operator bool() const;
@@ -120,13 +119,8 @@ template <typename T> void swap(SharedPtr<T> &lhs, SharedPtr<T> &rhs) {
 	lhs.swap(rhs);
 }
 
-
-template <typename T> void SharedPtr<T>::reset() {
-	decrement_andif_destroy();
-}
-
 template <typename T> void SharedPtr<T>::reset(T *bptr, const std::function<void(T*)> &del) {
-	reset();
+	decrement_andif_destroy();
 	ptr = bptr;
 	count = (bptr ? new int(1) : nullptr);
 	deleter = del;
