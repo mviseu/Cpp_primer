@@ -5,7 +5,7 @@ class DebugDelete {
 public:
 	DebugDelete(std::ostream &out = std::cerr) : os(out) {}
 	template <typename T> void operator()(T * ptr) const {
-		os << "Deleting pointer with DebugDelete" << std::endl;
+		std::cout << "Deleting pointer with DebugDelete" << std::endl;
 		delete ptr;
 	} 
 

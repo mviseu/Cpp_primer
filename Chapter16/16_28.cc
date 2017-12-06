@@ -121,12 +121,28 @@ int main() {
 	std::cout << "End of uptr_debug scope" << std::endl;
 	*/
 
+	/*
 	{
 		UniquePtr<int> sptr_debug(new int(2));
 		sptr_debug = std::move(UniquePtr<int>(new int(2)));
 	}
 	std::cout << "End of sptr_debug scope" << std::endl;
+	*/
 
-
+	/*
+	UniquePtr<int, DebugDelete> uptr(new int(2), DebugDelete());
+	{
+		SharedPtr<int> sptr(std::move(uptr));
+		{
+			SharedPtr<int> sptr_to_swap(new int(3));
+			sptr_to_swap.swap(sptr);
+			std::cout << "sptr to swap: " << *sptr_to_swap << std::endl;
+		}
+		std::cout << "End of sptr to swap scope" << std::endl;
+		std::cout << "sptr " << *sptr << std::endl;
+	}
+	std::cout << "end of shared ptr scope" << std::endl;
+	*/
+	UniquePtr<int> uptr(new int(3));
 	return 0;
 }

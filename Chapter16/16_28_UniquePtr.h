@@ -23,7 +23,6 @@ public:
 	UniquePtr &operator=(const UniquePtr &rhs) = delete;
 
 	UniquePtr &operator=(UniquePtr &&rhs) noexcept {
-		std::cout << "move unique ptr" << std::endl;
 		if(&rhs != this) {
 			decrement_andif_destroy();
 			ptr = rhs.ptr;
@@ -44,6 +43,7 @@ public:
 	T *operator->() const;
 	explicit operator bool() const;
 	T *get() const {return ptr;}
+	const D &get_deleter() const {return deleter;}
 	void swap(UniquePtr &rhs);
 
 
@@ -90,7 +90,6 @@ template <typename T, typename D> void UniquePtr<T, D>::swap(UniquePtr &rhs) {
 	::swap(*this, rhs);
 }
 
-
 template <typename T, typename D> void UniquePtr<T, D>::reset(T *bptr) {
 	decrement_andif_destroy();
 	ptr = bptr;
@@ -118,10 +117,7 @@ Shared Ptr - construct and assign
 
 */
 
-
 /*
 TODO
-- why does debugdelete swap not work:
-- review
-- Add a uniqueptr constructor to sharedptr class
+- swap in clang - does it work?
 */

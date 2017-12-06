@@ -1,4 +1,5 @@
 #pragma once
+#include "16_28_UniquePtr.h"
 #include <memory>
 #include <functional>
 #include <stdexcept>
@@ -28,6 +29,15 @@ public:
 	SharedPtr(const SharedPtr &sptr) : ptr(sptr.ptr), count(sptr.count) {++*count;}
 	SharedPtr(SharedPtr &&sptr) noexcept : ptr(sptr.ptr), count(sptr.count), deleter(std::move(sptr.deleter)) {
 		set_ptrs_to_null(sptr);
+	}
+	template <typename D> SharedPtr(UniquePtr<T, D> &&uptr) {
+		// if uptr manages no object, equivalent to default (no deleter)
+		// else
+		if(uptr.get()) {
+			ptr = uptr.release();
+			count = new int(1);
+			deleter = uptr.get_deleter();
+		}
 	}
 	// assignment
 	SharedPtr &operator=(const SharedPtr &rhs) {
