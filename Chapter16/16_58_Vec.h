@@ -124,7 +124,8 @@ template <typename T> void Vec<T>::push_back(const T &s) {
 	alloc.construct(first_free++, s);
 }
 
-template <typename ... Args> Vec<T>::void emplace_back(Args && ... args) {
+template <typename T>
+template <typename ... Args> void Vec<T>::emplace_back(Args && ... args) {
 	chk_n_alloc();
 	alloc.construct(first_free++, std::forward<Args>(args) ...);
 }
@@ -199,6 +200,3 @@ template <typename T> bool operator<=(const Vec<T> &lhs, const Vec<T> &rhs) {
 template <typename T> bool operator>=(const Vec<T> &lhs, const Vec<T> &rhs) {
 	return !(lhs < rhs);
 }
-
-
-
