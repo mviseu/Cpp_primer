@@ -14,7 +14,7 @@ using std::vector;
 
 struct PersonInfo {
 	string name;
-	vector<std::smatch> phones;
+	vector<std::string> phones;
 };
 
 bool isValid(const std::smatch &m) {
@@ -23,7 +23,6 @@ bool isValid(const std::smatch &m) {
 
 	} else {
 		return !m[3].matched && m[4].str() == m[6].str();
-
 	}
 }
 
@@ -40,31 +39,32 @@ int main() {
 		return -1;
 	}
 
-	std::string phone_pattern = "(\\()?(\\d{3})(\\))?([-. ])?(\\d{3})([-. ])?(\\d{4})";
+	std::string phone_pattern = "(\\()?(\\d{3})(\\))?([-.]|([\\s]*))?(\\d{3})([-.]|([\\s]*))?(\\d{4})";
 	std::regex phone_regex(phone_pattern);
 
 	vector<PersonInfo> people;
-	string line, phone;
-
-	istringstream record;	
+	string line;
+	
 	while(getline(input, line)) {
 		PersonInfo person;
-		record.str(line);
+		istringstream record(line);
 		record >> person.name;
-		people.push_back(person);
-		for(std::sregex_iterator it(line.cbegin(), line.cend(), phone_regex), it_end;
+		for(std::sregex_iterator it(line.cbegin() + person.name.size(), line.cend(), phone_regex), it_end;
 			it != it_end; ++it) {
-			person.phones.push_back(*it);
+			person.phones.push_back(it->str());
 		}
-		record.clear();
+		people.push_back(person);
 	}
+
 	for(const auto &entry : people) {
 		ostringstream formatted, badNumb;
 		for(const auto &nums : entry.phones) {
-			if(isValid(nums)) {
-				formatted << " " << format(nums);
+			std::smatch phone_result;
+			std::regex_search(nums, phone_result, phone_regex);
+			if(isValid(phone_result)) {
+				formatted << " " << format(phone_result);
 			} else {
-				badNumb << " " << nums.str();
+				badNumb << " " << nums;
 			}
 		}
 
