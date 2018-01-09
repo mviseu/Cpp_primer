@@ -6,6 +6,8 @@
 
 #include <memory>
 
+namespace chapter18 {
+
 Query operator~(const Query &qr) {
 	return std::shared_ptr<BaseQuery>(new NotQuery(qr));
 }
@@ -21,3 +23,5 @@ Query operator|(const Query &lhs, const Query &rhs) {
 std::ostream &operator<<(std::ostream &os, const Query &q) {
 	return os << q.rep();
 }
+
+} // namespace chapter8

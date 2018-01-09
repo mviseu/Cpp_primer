@@ -11,6 +11,8 @@ using std::vector;
 using std::initializer_list;
 using std::make_shared;
 
+namespace chapter18 {
+
 class StrBlobPtr;
 
 class StrBlob {
@@ -45,3 +47,5 @@ private:
   string &do_back() const;
   void check(size_type i, const string &message) const;
 };
+
+} // namespace chapter8

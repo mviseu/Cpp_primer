@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+namespace chapter18 {
+
 class WordQuery : public BaseQuery {
 	friend class Query;
 	WordQuery(const std::string &wd) noexcept(noexcept(std::string(wd))): word(wd) {
@@ -27,4 +29,5 @@ class WordQuery : public BaseQuery {
 
 	std::string word;
 };
-  
+ 
+} // namespace chapter8

@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 
+namespace chapter18 {
+
 class AndQuery : public BinaryQuery {
 	friend Query operator&(const Query &lhs, const Query &rhs);
 	AndQuery(const Query &lhs, const Query &rhs) noexcept(false) : BinaryQuery(lhs, rhs, "&") {
@@ -15,3 +17,5 @@ class AndQuery : public BinaryQuery {
 	}
 	QueryResult eval(const TextQuery &tq, line_no range_start, line_no range_end) const;	
 };
+
+} // namespace chapter8

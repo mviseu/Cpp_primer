@@ -9,6 +9,8 @@ using std::string;
 using std::vector;
 using std::size_t;
 
+namespace chapter18 {
+
 class StrBlob;
 
 class StrBlobPtr {
@@ -23,3 +25,5 @@ private:
 	weak_ptr<vector<string>> wkpr;
 	size_t curr = 0;
 };
+
+} // namespace chapter8

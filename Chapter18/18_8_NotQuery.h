@@ -6,6 +6,8 @@
 #include <string>
 #include <iostream>
 
+namespace chapter18 {
+
 class NotQuery : public BaseQuery {
 	friend Query operator~(const Query &qr);
 	NotQuery(const Query &q) noexcept(noexcept(Query(q))): qr(q) {
@@ -21,4 +23,6 @@ class NotQuery : public BaseQuery {
 		return "~ (" + qr.rep() + ")";
 	}
 	Query qr; 
-};	
+};
+
+} // namespace chapter8

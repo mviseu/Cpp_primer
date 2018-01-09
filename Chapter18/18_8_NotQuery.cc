@@ -4,6 +4,8 @@
 #include <set>
 #include <memory>
 
+namespace chapter18 {
+
 QueryResult NotQuery::eval(const TextQuery &tq, line_no range_start, line_no range_end) const {
 	#ifdef VERBOSE
 		std::cout << "NotQuery eval" << std::endl;
@@ -21,3 +23,5 @@ QueryResult NotQuery::eval(const TextQuery &tq, line_no range_start, line_no ran
 	}
 	return QueryResult(rep(), *yes_result.get_file(), not_lines);
 }	
+
+} // namespace chapter8

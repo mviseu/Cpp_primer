@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <iterator>
 
+namespace chapter18 {
+
 QueryResult OrQuery::eval(const TextQuery &tq, line_no range_start, line_no range_end) const {
 	#ifdef VERBOSE
 		std::cout << "OrQuery eval" << std::endl;
@@ -17,4 +19,6 @@ QueryResult OrQuery::eval(const TextQuery &tq, line_no range_start, line_no rang
 	lines->insert(rhs_result.begin(), rhs_result.end());
 	return QueryResult(rep(), *lhs_result.get_file(), lines);
 }
+
+} // namespace chapter8
 

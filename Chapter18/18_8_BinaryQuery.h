@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
+namespace chapter18 {
+
 class BinaryQuery : public BaseQuery {
 protected:
 	BinaryQuery(const Query &l, const Query &r, const std::string &s) noexcept(false) : lhs(l), rhs(r), sym(s) {
@@ -19,3 +21,5 @@ protected:
 	Query lhs, rhs;
 	std::string sym;
 };
+
+} // namespace chapter8

@@ -19,6 +19,8 @@ using std::cout;
 using std::endl;
 using std::make_pair;
 
+namespace chapter18 {
+
 TextQuery::TextQuery(ifstream &input) : file() {
 	for(string line; getline(input, line); ) {
 		file.push_back(line);
@@ -53,3 +55,5 @@ QueryResult TextQuery::query(const string &word, std::size_t range_start, std::s
 		return QueryResult(word, file, lines_ptr);
 	}
 }
+
+} // namespace chapter8

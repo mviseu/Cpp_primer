@@ -6,6 +6,8 @@
 #include "18_8_QueryResult.h"
 #include "18_8_TextQuery.h"
 
+namespace chapter18 {
+
 class BaseQuery {
 friend class Query;
 protected:
@@ -21,3 +23,5 @@ private:
 	virtual std::string rep() const = 0;
 
 };
+
+} // namespace chapter8

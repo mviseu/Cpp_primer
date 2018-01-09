@@ -14,6 +14,8 @@ using std::shared_ptr;
 using std::set;
 using std::map;
 
+namespace chapter18 {
+
 class QueryResult;
 
 class TextQuery
@@ -28,3 +30,5 @@ private:
 	void printMap();
 	
 };
+
+} // namespace chapter8

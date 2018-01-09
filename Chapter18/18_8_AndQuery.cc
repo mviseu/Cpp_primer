@@ -6,6 +6,8 @@
 #include <set>
 #include <memory>
 
+namespace chapter18 {
+
 QueryResult AndQuery::eval(const TextQuery &tq, line_no range_start, line_no range_end) const {
 	#ifdef VERBOSE
 		std::cout << "AndQuery eval" << std::endl;
@@ -16,3 +18,5 @@ QueryResult AndQuery::eval(const TextQuery &tq, line_no range_start, line_no ran
 	std::set_intersection(lhs_result.begin(), lhs_result.end(), rhs_result.begin(), rhs_result.end(), std::inserter(*lines, lines->begin()));
 	return QueryResult(rep(), *lhs_result.get_file(), lines);
 }
+
+} // namespace chapter8

@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 
+namespace chapter18 {
+
 class Query {
 
 friend Query operator~(const Query &qr);
@@ -49,3 +51,5 @@ Query operator|(const Query &lhs, const Query &rhs);
 Query operator&(const Query &lhs, const Query &rhs);
 
 std::ostream &operator<<(std::ostream &os, const Query &q);
+
+} // namespace chapter8

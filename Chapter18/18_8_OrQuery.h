@@ -5,6 +5,8 @@
 #include "18_8_BinaryQuery.h"
 #include <iostream>
 
+namespace chapter18 {
+
 class OrQuery : public BinaryQuery {
 	friend Query operator|(const Query &lhs, const Query &rhs);
 	OrQuery(const Query &lhs, const Query &rhs) noexcept(false) : BinaryQuery(lhs, rhs, "|") {
@@ -14,3 +16,5 @@ class OrQuery : public BinaryQuery {
 	}
 	QueryResult eval(const TextQuery &tq, line_no range_start, line_no range_end) const;
 };
+
+} // namespace chapter8

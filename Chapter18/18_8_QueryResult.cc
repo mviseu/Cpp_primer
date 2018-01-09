@@ -15,6 +15,7 @@ using std::ostream;
 using std::endl;
 using std::make_shared;
 
+namespace chapter18 {
 
 QueryResult::QueryResult(string wd, StrBlob p_text, shared_ptr<set<size_t>> ptr_wd_line_nrs) 
 					    noexcept(false) : sought(wd), file(p_text), lines(ptr_wd_line_nrs) {
@@ -39,3 +40,5 @@ QueryResult::SetIter QueryResult::end() const {
 shared_ptr<StrBlob> QueryResult::get_file() const {
 	return make_shared<StrBlob>(file);
 }
+
+} // namespace chapter8

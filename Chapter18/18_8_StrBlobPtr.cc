@@ -13,6 +13,7 @@ using std::out_of_range;
 using std::runtime_error;
 using std::size_t;
 
+namespace chapter18 {
 
 StrBlobPtr:: StrBlobPtr(StrBlob &sptr, size_t i) noexcept : wkpr(sptr.data), curr(i) {}
 
@@ -38,3 +39,5 @@ StrBlobPtr &StrBlobPtr::incr() {
 	++curr;
 	return *this;
 }
+
+} // namespace chapter8

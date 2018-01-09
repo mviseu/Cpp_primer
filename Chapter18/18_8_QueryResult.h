@@ -15,6 +15,8 @@ using std::map;
 using std::vector;
 using std::ostream;
 
+namespace chapter18 {
+
 class QueryResult {
 	friend ostream &print(ostream &os, const QueryResult& qr);
 public:
@@ -30,3 +32,6 @@ private:
 	StrBlob file;
 	shared_ptr<set<size_t>> lines;
 };
+
+ostream &print(ostream &os, const QueryResult &qr);
+} // namespace chapter8

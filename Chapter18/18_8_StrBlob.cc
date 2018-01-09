@@ -13,6 +13,9 @@ using std::initializer_list;
 using std::make_shared;
 using std::out_of_range
 ;
+
+namespace chapter18 {
+
 StrBlob::StrBlob() noexcept(false)
     : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(const initializer_list<string> &il) noexcept(false)
@@ -57,3 +60,5 @@ StrBlobPtr StrBlob::end() {return StrBlobPtr(*this, data -> size());}
 vector<string> *StrBlob::get() const {
   return data.get();
 }
+
+} // namespace chapter8
