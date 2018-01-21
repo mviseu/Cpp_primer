@@ -32,5 +32,27 @@ int main() {
 			std::cout << "cast succeeded" << std::endl;
 		}
 	}
+
+	{
+		B *pb = new B;
+
+		if(C *pc = dynamic_cast<C*>(pb)) {
+		} else {
+			std::cout << "cast failed" << std::endl;
+		}
+	}
+
+/*
+	{	// ambiguous conversion from derived class D to A
+		A *pa = new D;
+
+		if(B *pb = dynamic_cast<B*>(pa)) {
+			std::cout << "cast succeeded" << std::endl;
+		} else {
+		}
+	}
+*/
+
+
 	return 0;
 }
