@@ -9,6 +9,11 @@ struct Sales_data {
   Sales_data(const std::string &s) : bookNo(s) {}
   Sales_data(const std::string &s, const unsigned u, const double d)
       : bookNo(s), nr_units(u), revenue(d) {}
+  Sales_data(const Sales_data &) = default;
+  Sales_data(Sales_data &&) = default;
+  Sales_data &operator=(const Sales_data &) = default;
+  Sales_data &operator=(Sales_data &&) = default;
+  ~Sales_data() = default;
 
   // member functions
   std::string isbn() const { return bookNo; }

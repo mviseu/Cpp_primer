@@ -1,55 +1,91 @@
 #include "Token.h"
 
 Token& Token::operator=(const Token& t) {
+	#ifdef VERBOSE
+		std::cout << "operator=(const Token& t)" << std::endl;
+	#endif
 	if(tok == STR && t.tok != STR) {
 		using std::string;
 		sval.~string();
 	}
+	if(tok == SD && t.tok != SD) {
+		sdval.~Sales_data();
+	}
 	if(tok == STR && t.tok == STR) {
 		sval = t.sval;
 	} else {
-		CopyUnion(t);
+		if(tok == SD && t.tok == SD) {
+			sdval = t.sdval;
+		} else {
+			CopyUnion(t);			
+		}
 	}
 	tok = t.tok;
 	return *this;
 }
 
 Token& Token::operator=(Token&& t) {
+	#ifdef VERBOSE
+		std::cout << "operator=(Token&&)" << std::endl;
+	#endif
 	if(tok == STR && t.tok != STR) {
 		using std::string;
 		sval.~string();
 	}
+	if(tok == SD && t.tok != SD) {
+		sdval.~Sales_data();
+	}
 	if(tok == STR && t.tok == STR) {
 		sval = std::move(t.sval);
 	} else {
-		MoveUnion(std::move(t));
+		if(tok == SD && t.tok == SD) {
+			sdval = std::move(t.sdval);
+		} else {
+			MoveUnion(std::move(t));			
+		}
 	}
-	tok = std::move(t.tok);
+	tok = t.tok;
 	return *this;
 }
 
 Token& Token::operator=(char c) {
+	#ifdef VERBOSE
+		std::cout << "operator=(char c)" << std::endl;
+	#endif
 	DestroyIfTokStr();
+	DestroyIfTokSd();
 	tok = CHAR;
 	cval = c;
 	return *this;
 }
 
 Token& Token::operator=(int i) {
+	#ifdef VERBOSE
+		std::cout << "operator=(int i)" << std::endl;
+	#endif
 	DestroyIfTokStr();
+	DestroyIfTokSd();
 	tok = INT;
 	ival = i;
 	return *this;
 }
 
 Token& Token::operator=(double d) {
+	#ifdef VERBOSE
+		std::cout << "operator=(double d)" << std::endl;
+	#endif
 	DestroyIfTokStr();
+	DestroyIfTokSd();
 	tok = DBL;
 	dval = d;
 	return *this;
 }
 
 Token& Token::operator=(const std::string& s) {
+	#ifdef VERBOSE
+		std::cout << "operator=(string s)" << std::endl;
+	#endif
+	DestroyIfTokSd();
 	if(tok == STR) {
 		sval = s;
 	} else {
@@ -60,10 +96,17 @@ Token& Token::operator=(const std::string& s) {
 }
 
 Token& Token::operator=(const Sales_data &sd) {
+	#ifdef VERBOSE
+		std::cout << "operator=(const Sales_data &sd)" << std::endl;
+	#endif
 	DestroyIfTokStr();
-	tok = SD;
-	sdval = sd;
-	return *this;
+	if(tok == SD) {
+		sdval = sd;
+	} else {
+		new(&sdval) Sales_data(sd);
+		tok = SD;
+	}
+	return *this;	
 }
 
 void Token::CopyUnion(const Token& t) {
@@ -81,7 +124,8 @@ void Token::CopyUnion(const Token& t) {
 			new(&sval) std::string(t.sval);
 			break;
 		case SD:
-			sdval = t.sdval;
+			new(&sdval) Sales_data(t.sdval);
+			break;
 	}
 }
 
@@ -100,7 +144,7 @@ void Token::MoveUnion(Token&& t) {
 			new(&sval) std::string(std::move(t.sval));
 			break;
 		case SD:
-			sdval = std::move(t.sdval);
+			new(&sdval) Sales_data(std::move(t.sdval));
 	}
 }
 
@@ -109,4 +153,10 @@ void Token::DestroyIfTokStr() {
 		using std::string;
 		sval.~string();
 	}	
+}
+
+void Token::DestroyIfTokSd() {
+	if(tok == SD) {
+		sdval.~Sales_data();
+	}
 }
